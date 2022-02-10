@@ -1,0 +1,33 @@
+.ORIG x1200
+
+STW R0, R6, #-2
+STW R1, R6, #-4
+STW R2, R6, #-6
+STW R3, R6, #-8
+
+LEA R0, TABLE
+LDW R0, R0, #0
+LEA R1, COUNT
+LDW R1, R1, #0
+
+LEA R3, CLEAR
+LDW R3, R3, #0
+
+LOOP	LDW R2, R0, #0
+	AND R2, R2, R3; PTE = PTE & FFFE, clears lowest bit
+	STW R2, R0, #0
+	ADD R0, R0, #2
+	ADD R1, R1, #-1
+	BRp LOOP	
+
+LDW R0, R6, #-2
+LDW R1, R6, #-4
+LDW R2, R6, #-6
+LDW R3, R6, #-8
+
+RTI
+
+TABLE 	.FILL x1000
+COUNT 	.FILL x0080
+CLEAR	.FILL xFFFE
+.END

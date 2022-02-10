@@ -1,0 +1,23 @@
+.ORIG x3000
+	
+	LEA R0, DATA
+	LDW R0, R0, #0
+	ADD R4, R4, #10
+	ADD R4, R4, #10
+	
+
+
+loop 	LDB R1, R0, #0
+	ADD R2, R2, R1
+	ADD R0, R0, #1
+	ADD R4, R4, #-1
+	BRp loop
+	
+	
+	STW R2, R0, #0
+	JMP R2
+HALT
+
+DATA .FILL xC000
+INVA .FILL xA000
+.END
